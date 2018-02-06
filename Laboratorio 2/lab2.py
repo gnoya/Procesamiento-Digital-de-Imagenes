@@ -18,7 +18,6 @@ def maxMin(hist, totalPixels):
 
 image = cv2.imread('tornado.jpg')
 totalPixels = image.size / 3
-
 ## Histogramas RGB (BGR)
 blueHistogram = cv2.calcHist([image], [0], None, [256], [0, 256])
 greenHistogram = cv2.calcHist([image], [1], None, [256], [0, 256])
@@ -28,24 +27,26 @@ redHistogram = cv2.calcHist([image], [2], None, [256], [0, 256])
 ## BLUE
 minValue, maxValue = maxMin(blueHistogram, totalPixels)
 
-b = image[:,:,0]
-b =  (int)(255 / (maxValue - minValue)) * (b - minValue)
-
-ret,thresh4 = cv2.threshold(b,maxValue,maxValue,cv2.THRESH_TOZERO)
-ret,thresh5 = cv2.threshold(b,minValue,minValue,cv2.THRESH_TOZERO_INV)
-
+b = np.array(image[:,:,0], int)
+b = (int)(255 / (maxValue - minValue)) * (b - minValue)
+b[b < 0] = 0
+b = np.array(b, np.uint8)
 
 ## GREEN 
 minValue, maxValue = maxMin(greenHistogram, totalPixels)
 
-g = image[:,:,1]
-g =  (int)(255 / (maxValue - minValue)) * (g - minValue)
+g = np.array(image[:,:,1], int)
+g = (int)(255 / (maxValue - minValue)) * (g - minValue)
+g[g < 0] = 0
+g = np.array(g, np.uint8)
 
 ## RED
 minValue, maxValue = maxMin(redHistogram, totalPixels)
 
-r = image[:,:,2]
+r = np.array(image[:,:,2], int)
 r =  (int)(255 / (maxValue - minValue)) * (r - minValue)
+r[r < 0] = 0
+r = np.array(r, np.uint8)
 
 
 img = cv2.merge((b,g,r))
