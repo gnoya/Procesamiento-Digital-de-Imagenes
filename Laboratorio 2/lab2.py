@@ -19,6 +19,7 @@ def maxMin(hist, totalPixels):
 image = cv2.imread('tornado.jpg')
 totalPixels = image.size / 3
 ## Histogramas RGB (BGR)
+
 blueHistogram = cv2.calcHist([image], [0], None, [256], [0, 256])
 greenHistogram = cv2.calcHist([image], [1], None, [256], [0, 256])
 redHistogram = cv2.calcHist([image], [2], None, [256], [0, 256])
@@ -57,10 +58,22 @@ plt.imshow(image)
 plt.figure()
 plt.imshow(img)
 
-# plt.xlim([0, 256])
-# plt.plot(blueHistogram, 'b')
-# plt.plot(greenHistogram, 'g')
-# plt.plot(redHistogram, 'r')
+plt.figure()
+plt.xlim([0, 256])
+plt.plot(blueHistogram, 'b')
+plt.plot(greenHistogram, 'g')
+plt.plot(redHistogram, 'r')
+
+
+blueHistogram = cv2.calcHist([img], [0], None, [256], [0, 256])
+greenHistogram = cv2.calcHist([img], [1], None, [256], [0, 256])
+redHistogram = cv2.calcHist([img], [2], None, [256], [0, 256])
+
+plt.figure()
+plt.xlim([0, 256])
+plt.plot(blueHistogram, 'b')
+plt.plot(greenHistogram, 'g')
+plt.plot(redHistogram, 'r')
 
 plt.show()
 
