@@ -49,13 +49,15 @@ r =  (int)(255 / (maxValue - minValue)) * (r - minValue)
 r[r < 0] = 0
 r = np.array(r, np.uint8)
 
-
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 img = cv2.merge((b,g,r))
-
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 plt.figure()
+plt.title('Imagen Original')
 plt.imshow(image)
 plt.figure()
+plt.title('Imagen con stretch')
 plt.imshow(img)
 
 plt.figure()
