@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
+fileName = 'tornado.jpg'
+
 def maxMin(hist, totalPixels):
     pxHist = 0
     i = 0
@@ -16,71 +18,56 @@ def maxMin(hist, totalPixels):
         i += 1
     return (mina,maxa)
 
-image = cv2.imread('tornado.jpg')
+def stretchFormula(channel, minValue, maxValue):
+    channel = np.array(channel, int)
+    channel = (int)(255 / (maxValue - minValue)) * (channel - minValue)
+    channel[channel < 0] = 0
+    return np.array(channel, np.uint8)
+    
+def hist(image):
+    return (cv2.calcHist([image], [0], None, [256], [0, 256]), 
+        cv2.calcHist([image], [1], None, [256], [0, 256]), cv2.calcHist([image], [2], None, [256], [0, 256]))
+
+def plotHistogram(b, g, r, text):
+    plt.figure()
+    plt.xlim([0, 256])
+    plt.plot(b, 'b')
+    plt.plot(g, 'g')
+    plt.plot(r, 'r')
+    plt.title(text)
+
+def plotBGRImage(image, text):
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    plt.figure()
+    plt.title(text)
+    plt.imshow(image)
+    
+
+image = cv2.imread(fileName)
 totalPixels = image.size / 3
 
-## Histogramas RGB (BGR)
+blueHistogram, greenHistogram, redHistogram  = hist(image)
 
-blueHistogram = cv2.calcHist([image], [0], None, [256], [0, 256])
-greenHistogram = cv2.calcHist([image], [1], None, [256], [0, 256])
-redHistogram = cv2.calcHist([image], [2], None, [256], [0, 256])
-
-
-## BLUE
+# Stretch del canal azul
 minValue, maxValue = maxMin(blueHistogram, totalPixels)
+b = stretchFormula(image[:,:,0], minValue, maxValue)
 
-b = np.array(image[:,:,0], int)
-b = (int)(255 / (maxValue - minValue)) * (b - minValue)
-b[b < 0] = 0
-b = np.array(b, np.uint8)
-
-## GREEN 
+# Stretch del canal verde
 minValue, maxValue = maxMin(greenHistogram, totalPixels)
+g = stretchFormula(image[:,:,1], minValue, maxValue)
 
-g = np.array(image[:,:,1], int)
-g = (int)(255 / (maxValue - minValue)) * (g - minValue)
-g[g < 0] = 0
-g = np.array(g, np.uint8)
-
-## RED
+# Stretch del canal rojo
 minValue, maxValue = maxMin(redHistogram, totalPixels)
+r = stretchFormula(image[:,:,2], minValue, maxValue)
 
-r = np.array(image[:,:,2], int)
-r =  (int)(255 / (maxValue - minValue)) * (r - minValue)
-r[r < 0] = 0
-r = np.array(r, np.uint8)
+stretchImage = cv2.merge((b,g,r))
 
-image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-img = cv2.merge((b,g,r))
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+stBlueHistogram, stGreenHistogram, stRedHistogram = hist(stretchImage)
 
-plt.figure()
-plt.title('Imagen Original')
-plt.imshow(image)
-plt.figure()
-plt.title('Imagen con stretch')
-plt.imshow(img)
+plotHistogram(blueHistogram, greenHistogram, redHistogram, 'Histograma original')
+plotHistogram(stBlueHistogram, stGreenHistogram, stRedHistogram, 'Histograma equalizado')
 
-plt.figure()
-plt.xlim([0, 256])
-plt.title('Histograma Original')
-plt.plot(blueHistogram, 'b')
-plt.plot(greenHistogram, 'g')
-plt.plot(redHistogram, 'r')
-
-blueHistogram = cv2.calcHist([img], [0], None, [256], [0, 256])
-greenHistogram = cv2.calcHist([img], [1], None, [256], [0, 256])
-redHistogram = cv2.calcHist([img], [2], None, [256], [0, 256])
-
-plt.figure()
-plt.xlim([0, 256])
-plt.title('Histograma con stretch')
-plt.plot(blueHistogram, 'b')
-plt.plot(greenHistogram, 'g')
-plt.plot(redHistogram, 'r')
+plotBGRImage(image, 'Imagen original')
+plotBGRImage(stretchImage, 'Imagen estirada')
 
 plt.show()
-
-
-
-# 82 lineas
