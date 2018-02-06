@@ -68,7 +68,6 @@ plt.plot(blueHistogram, 'b')
 plt.plot(greenHistogram, 'g')
 plt.plot(redHistogram, 'r')
 
-
 blueHistogram = cv2.calcHist([img], [0], None, [256], [0, 256])
 greenHistogram = cv2.calcHist([img], [1], None, [256], [0, 256])
 redHistogram = cv2.calcHist([img], [2], None, [256], [0, 256])
