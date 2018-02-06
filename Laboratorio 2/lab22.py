@@ -34,7 +34,7 @@ blueHistogram, greenHistogram, redHistogram  = hist(image)
 eqBlueHistogram, eqGreenHistogram, eqRedHistogram = hist(eqImage)
 
 plotHistogram(blueHistogram, greenHistogram, redHistogram, 'Histograma original')
-plotHistogram(eqBlueHistogram, eqGreenHistogram, eqRedHistogram, 'Histograma original')
+plotHistogram(eqBlueHistogram, eqGreenHistogram, eqRedHistogram, 'Histograma equalizado')
 
 plotBGRImage(image, 'Imagen original')
 plotBGRImage(eqImage, 'Imagen equalizada')

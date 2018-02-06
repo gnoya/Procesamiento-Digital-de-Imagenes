@@ -81,3 +81,6 @@ plt.plot(redHistogram, 'r')
 
 plt.show()
 
+
+
+# 82 lineas
