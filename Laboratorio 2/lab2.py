@@ -2,11 +2,13 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-fileName = 'tornado.jpg'
+fileName = 'NoyaCabrera.jpg'
 
 def maxMin(hist, totalPixels):
     pxHist = 0
     i = 0
+    mina = 0
+    maxa = 0
     pxMin = totalPixels * 0.05
     pxMax = totalPixels * 0.95
     while (pxHist < totalPixels):
