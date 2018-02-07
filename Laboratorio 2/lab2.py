@@ -62,12 +62,21 @@ r = stretchFormula(image[:,:,2], minValue, maxValue)
 
 stretchImage = cv2.merge((b,g,r))
 
+b = cv2.equalizeHist(image[:,:,0])
+g = cv2.equalizeHist(image[:,:,1])
+r = cv2.equalizeHist(image[:,:,2])
+
+eqImage = cv2.merge((b,g,r))
+
 stBlueHistogram, stGreenHistogram, stRedHistogram = hist(stretchImage)
+eqBlueHistogram, eqGreenHistogram, eqRedHistogram = hist(eqImage)
 
 plotHistogram(blueHistogram, greenHistogram, redHistogram, 'Histograma original')
-plotHistogram(stBlueHistogram, stGreenHistogram, stRedHistogram, 'Histograma equalizado')
+plotHistogram(stBlueHistogram, stGreenHistogram, stRedHistogram, 'Histograma estirado')
+plotHistogram(eqBlueHistogram, eqGreenHistogram, eqRedHistogram, 'Histograma equalizado')
 
 plotBGRImage(image, 'Imagen original')
 plotBGRImage(stretchImage, 'Imagen estirada')
+plotBGRImage(eqImage, 'Imagen equalizada')
 
 plt.show()
