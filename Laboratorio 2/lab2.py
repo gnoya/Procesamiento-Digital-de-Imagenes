@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-fileName = 'NoyaCabrera.jpg'
+fileName = 'Pirata.tif'
 
 def maxMin(hist, totalPixels):
     pxHist = 0
@@ -25,18 +25,6 @@ def stretchFormula(channel, minValue, maxValue):
     channel = (int)(255 / (maxValue - minValue)) * (channel - minValue)
     channel[channel < 0] = 0
     return np.array(channel, np.uint8)
-    
-def hist(image):
-    return (cv2.calcHist([image], [0], None, [256], [0, 256]), 
-        cv2.calcHist([image], [1], None, [256], [0, 256]), cv2.calcHist([image], [2], None, [256], [0, 256]))
-
-# def plotHistogram(b, g, r, text):
-#     plt.figure()
-#     plt.xlim([0, 256])
-#     plt.plot(b, 'b')
-#     plt.plot(g, 'g')
-#     plt.plot(r, 'r')
-#     plt.title(text)
 
 def plotHistogram(hist, color, text, subplot):
     plt.subplot(subplot)
@@ -49,55 +37,30 @@ def plotBGRImage(image, text, subplot):
     plt.subplot(subplot)
     plt.title(text)
     plt.imshow(image)
-    
 
 image = cv2.imread(fileName)
 totalPixels = image.size / 3
 
-blueHistogram, greenHistogram, redHistogram  = hist(image)
+histogram = cv2.calcHist([img], [0], None, [256], [0,256])
 
-# Stretch del canal azul
-minValue, maxValue = maxMin(blueHistogram, totalPixels)
-b = stretchFormula(image[:,:,0], minValue, maxValue)
+# Stretch
+minValue, maxValue = maxMin(histogram, totalPixels)
+stretchImage = stretchFormula(image, minValue, maxValue)
 
-# Stretch del canal verde
-minValue, maxValue = maxMin(greenHistogram, totalPixels)
-g = stretchFormula(image[:,:,1], minValue, maxValue)
+# Equalization
+eqImage = cv2.equalizeHist(image)
 
-# Stretch del canal rojo
-minValue, maxValue = maxMin(redHistogram, totalPixels)
-r = stretchFormula(image[:,:,2], minValue, maxValue)
+# New histograms
+stretchHistogram = hist(stretchImage)
+equalizedHistogram = hist(eqImage)
 
-stretchImage = cv2.merge((b,g,r))
-
-b = cv2.equalizeHist(image[:,:,0])
-g = cv2.equalizeHist(image[:,:,1])
-r = cv2.equalizeHist(image[:,:,2])
-
-eqImage = cv2.merge((b,g,r))
-
-stBlueHistogram, stGreenHistogram, stRedHistogram = hist(stretchImage)
-eqBlueHistogram, eqGreenHistogram, eqRedHistogram = hist(eqImage)
-
+# Histogram plotting
 plt.figure()
+plotHistogram(histogram, 'b', 'Histograma original', 331)
+plotHistogram(stretchHistogram, 'b', 'Histograma estirado', 332)
+plotHistogram(equalizedHistogram, 'b', 'Histograma equalizado', 333)
 
-plotHistogram(blueHistogram, 'b', 'Histograma azul original', 331)
-plotHistogram(greenHistogram, 'g', 'Histograma verde original', 331)
-plotHistogram(redHistogram, 'r', 'Histograma rojo original', 331)
-
-plotHistogram(stBlueHistogram, 'b', 'Histograma azul estirado', 332)
-plotHistogram(stGreenHistogram, 'g', 'Histograma verde estirado', 332)
-plotHistogram(stRedHistogram, 'r', 'Histograma rojo estirado', 333)
-
-plotHistogram(eqBlueHistogram, 'b', 'Histograma azul equalizado', 333)
-plotHistogram(eqGreenHistogram, 'g', 'Histograma verde equalizado', 333)
-plotHistogram(eqRedHistogram, 'r', 'Histograma rojo equalizado', 333)
-
-# plotHistogram(blueHistogram, greenHistogram, redHistogram, 'Histograma original')
-# plotHistogram(stBlueHistogram, stGreenHistogram, stRedHistogram, 'Histograma estirado')
-# plotHistogram(eqBlueHistogram, eqGreenHistogram, eqRedHistogram, 'Histograma equalizado')
-
-
+# Image plotting
 plotBGRImage(image, 'Imagen original', 337)
 plotBGRImage(stretchImage, 'Imagen estirada', 338)
 plotBGRImage(eqImage, 'Imagen equalizada', 339)
