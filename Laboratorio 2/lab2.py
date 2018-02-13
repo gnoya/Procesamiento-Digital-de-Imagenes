@@ -51,8 +51,8 @@ stretchImage = stretchFormula(image, minValue, maxValue)
 eqImage = cv2.equalizeHist(image)
 
 # New histograms
-stretchHistogram = hist(stretchImage)
-equalizedHistogram = hist(eqImage)
+stretchHistogram = cv2.calcHist([stretchImage], [0], None, [256], [0,256])
+equalizedHistogram = cv2.calcHist([eqImage], [0], None, [256], [0,256])
 
 # Histogram plotting
 plt.figure()
