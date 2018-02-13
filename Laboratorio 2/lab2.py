@@ -39,7 +39,7 @@ def hist(image):
 #     plt.title(text)
 
 def plotHistogram(hist, color, text, subplot):
-
+    plt.subplot(subplot)
     plt.xlim([0, 256])
     plt.plot(hist, color)
     plt.title(text)
