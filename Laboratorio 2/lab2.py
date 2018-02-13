@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-fileName = 'Pirata.tif'
+fileName = 'NoyaCabrera.jpg'
 
 def maxMin(hist, totalPixels):
     pxHist = 0
@@ -33,15 +33,15 @@ def plotHistogram(hist, color, text, subplot):
     plt.title(text)
 
 def plotBGRImage(image, text, subplot):
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    #image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     plt.subplot(subplot)
     plt.title(text)
-    plt.imshow(image)
+    plt.imshow(image, cmap = 'gray')
 
-image = cv2.imread(fileName)
+image = cv2.imread(fileName, 0)
 totalPixels = image.size / 3
 
-histogram = cv2.calcHist([img], [0], None, [256], [0,256])
+histogram = cv2.calcHist([image], [0], None, [256], [0,256])
 
 # Stretch
 minValue, maxValue = maxMin(histogram, totalPixels)
@@ -56,13 +56,14 @@ equalizedHistogram = cv2.calcHist([eqImage], [0], None, [256], [0,256])
 
 # Histogram plotting
 plt.figure()
-plotHistogram(histogram, 'b', 'Histograma original', 331)
-plotHistogram(stretchHistogram, 'b', 'Histograma estirado', 332)
-plotHistogram(equalizedHistogram, 'b', 'Histograma equalizado', 333)
+plotHistogram(histogram, 'b', 'Histograma original', 131)
+plotHistogram(stretchHistogram, 'b', 'Histograma estirado', 132)
+plotHistogram(equalizedHistogram, 'b', 'Histograma equalizado', 133)
 
 # Image plotting
-plotBGRImage(image, 'Imagen original', 337)
-plotBGRImage(stretchImage, 'Imagen estirada', 338)
-plotBGRImage(eqImage, 'Imagen equalizada', 339)
+plt.figure()
+plotBGRImage(image, 'Imagen original', 131)
+plotBGRImage(stretchImage, 'Imagen estirada', 132)
+plotBGRImage(eqImage, 'Imagen equalizada', 133)
 
 plt.show()
