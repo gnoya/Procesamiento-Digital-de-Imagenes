@@ -29,7 +29,7 @@ plt.imshow(image), plt.title('Original')
 plt.figure()
 plt.imshow(imagenp), plt.title('Perfilado')
 plt.figure()
-plt.imshow(imagenp + imagen), plt.title('Imagen + perfilado')
+plt.imshow(imagenp + image), plt.title('Imagen + perfilado')
 
 
 #Filtro gaussiano d
@@ -57,6 +57,6 @@ plt.imshow(sobelx, cmap = 'gray'), plt.title('Sobel X')
 plt.figure()
 plt.imshow(sobely, cmap = 'gray'), plt.title('Sobel Y')
 plt.figure()
-plt.imshow(laplacianGaus, cmap = 'gray'), plt.title('Laplaciano del gaussiano')
+plt.imshow(laplacianGaussian, cmap = 'gray'), plt.title('Laplaciano del gaussiano')
 
 plt.show()
