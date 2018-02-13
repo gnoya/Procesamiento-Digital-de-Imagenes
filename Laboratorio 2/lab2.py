@@ -39,7 +39,7 @@ def hist(image):
 #     plt.title(text)
 
 def plotHistogram(hist, color, text, subplot):
-    
+
     plt.xlim([0, 256])
     plt.plot(hist, color)
     plt.title(text)
@@ -82,25 +82,24 @@ eqBlueHistogram, eqGreenHistogram, eqRedHistogram = hist(eqImage)
 plt.figure()
 
 plotHistogram(blueHistogram, 'b', 'Histograma azul original', 331)
-plotHistogram(greenHistogram, 'g', 'Histograma verde original', 332)
-plotHistogram(redHistogram, 'r', 'Histograma rojo original', 333)
+plotHistogram(greenHistogram, 'g', 'Histograma verde original', 331)
+plotHistogram(redHistogram, 'r', 'Histograma rojo original', 331)
 
-plotHistogram(stBlueHistogram, 'b', 'Histograma azul estirado', 334)
-plotHistogram(stGreenHistogram, 'g', 'Histograma verde estirado', 335)
-plotHistogram(stRedHistogram, 'r', 'Histograma rojo estirado', 336)
+plotHistogram(stBlueHistogram, 'b', 'Histograma azul estirado', 332)
+plotHistogram(stGreenHistogram, 'g', 'Histograma verde estirado', 332)
+plotHistogram(stRedHistogram, 'r', 'Histograma rojo estirado', 333)
 
-plotHistogram(eqBlueHistogram, 'b', 'Histograma azul equalizado', 337)
-plotHistogram(eqGreenHistogram, 'g', 'Histograma verde equalizado', 338)
-plotHistogram(eqRedHistogram, 'r', 'Histograma rojo equalizado', 339)
+plotHistogram(eqBlueHistogram, 'b', 'Histograma azul equalizado', 333)
+plotHistogram(eqGreenHistogram, 'g', 'Histograma verde equalizado', 333)
+plotHistogram(eqRedHistogram, 'r', 'Histograma rojo equalizado', 333)
 
 # plotHistogram(blueHistogram, greenHistogram, redHistogram, 'Histograma original')
 # plotHistogram(stBlueHistogram, stGreenHistogram, stRedHistogram, 'Histograma estirado')
 # plotHistogram(eqBlueHistogram, eqGreenHistogram, eqRedHistogram, 'Histograma equalizado')
 
-plt.figure()
 
-plotBGRImage(image, 'Imagen original', 221)
-plotBGRImage(stretchImage, 'Imagen estirada', 222)
-plotBGRImage(eqImage, 'Imagen equalizada', 223)
+plotBGRImage(image, 'Imagen original', 337)
+plotBGRImage(stretchImage, 'Imagen estirada', 338)
+plotBGRImage(eqImage, 'Imagen equalizada', 339)
 
 plt.show()
