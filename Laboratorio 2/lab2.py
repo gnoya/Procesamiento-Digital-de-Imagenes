@@ -30,17 +30,23 @@ def hist(image):
     return (cv2.calcHist([image], [0], None, [256], [0, 256]), 
         cv2.calcHist([image], [1], None, [256], [0, 256]), cv2.calcHist([image], [2], None, [256], [0, 256]))
 
-def plotHistogram(b, g, r, text):
-    plt.figure()
+# def plotHistogram(b, g, r, text):
+#     plt.figure()
+#     plt.xlim([0, 256])
+#     plt.plot(b, 'b')
+#     plt.plot(g, 'g')
+#     plt.plot(r, 'r')
+#     plt.title(text)
+
+def plotHistogram(hist, color, text, subplot):
+    
     plt.xlim([0, 256])
-    plt.plot(b, 'b')
-    plt.plot(g, 'g')
-    plt.plot(r, 'r')
+    plt.plot(hist, color)
     plt.title(text)
 
-def plotBGRImage(image, text):
+def plotBGRImage(image, text, subplot):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    plt.figure()
+    plt.subplot(subplot)
     plt.title(text)
     plt.imshow(image)
     
@@ -73,12 +79,28 @@ eqImage = cv2.merge((b,g,r))
 stBlueHistogram, stGreenHistogram, stRedHistogram = hist(stretchImage)
 eqBlueHistogram, eqGreenHistogram, eqRedHistogram = hist(eqImage)
 
-plotHistogram(blueHistogram, greenHistogram, redHistogram, 'Histograma original')
-plotHistogram(stBlueHistogram, stGreenHistogram, stRedHistogram, 'Histograma estirado')
-plotHistogram(eqBlueHistogram, eqGreenHistogram, eqRedHistogram, 'Histograma equalizado')
+plt.figure()
 
-plotBGRImage(image, 'Imagen original')
-plotBGRImage(stretchImage, 'Imagen estirada')
-plotBGRImage(eqImage, 'Imagen equalizada')
+plotHistogram(blueHistogram, 'b', 'Histograma azul original', 331)
+plotHistogram(greenHistogram, 'g', 'Histograma verde original', 332)
+plotHistogram(redHistogram, 'r', 'Histograma rojo original', 333)
+
+plotHistogram(stBlueHistogram, 'b', 'Histograma azul estirado', 334)
+plotHistogram(stGreenHistogram, 'g', 'Histograma verde estirado', 335)
+plotHistogram(stRedHistogram, 'r', 'Histograma rojo estirado', 336)
+
+plotHistogram(eqBlueHistogram, 'b', 'Histograma azul equalizado', 337)
+plotHistogram(eqGreenHistogram, 'g', 'Histograma verde equalizado', 338)
+plotHistogram(eqRedHistogram, 'r', 'Histograma rojo equalizado', 339)
+
+# plotHistogram(blueHistogram, greenHistogram, redHistogram, 'Histograma original')
+# plotHistogram(stBlueHistogram, stGreenHistogram, stRedHistogram, 'Histograma estirado')
+# plotHistogram(eqBlueHistogram, eqGreenHistogram, eqRedHistogram, 'Histograma equalizado')
+
+plt.figure()
+
+plotBGRImage(image, 'Imagen original', 221)
+plotBGRImage(stretchImage, 'Imagen estirada', 222)
+plotBGRImage(eqImage, 'Imagen equalizada', 223)
 
 plt.show()
