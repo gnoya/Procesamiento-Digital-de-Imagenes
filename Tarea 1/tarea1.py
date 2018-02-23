@@ -3,45 +3,111 @@ import numpy as np
 import sys
 from matplotlib import pyplot as plt
 
-#Variables
-nombre="test1.png"
-kAlto=5
-nLetras=0
-
-def eliminarRuido():
-    #Eliminar ruido
-    kernel=np.ones((1,1),np.uint8)
-    img=cv2.dilate(img,kernel,iterations=1)
-    img=cv2.erode(img,kernel,iterations=1)
-
-def imagenBinaria():     
-    #Creacion imagen binaria
-    return cv2.adaptiveThreshold(img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY_INV,31,2)
-
-def elementoEstrural():
-    #Barrido con elemento estructurante
-    kernel=np.ones((kAlto,1),np.uint8)
-    img=cv2.dilate(img,kernel,iterations=1)
-    img=cv2.erode(img,kernel,iterations=1)
-    return img 
-    
-def buscarLetras():
-    #Buscar contornos
-    (_,contorno,_)=cv2.findContours(imgGray,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
-    for c in contorno:
-        (x,y,w,h)=cv2.boundingRect(c)
-        cv2.rectangle(imgOriginal,(x,y),(x+w,y+h),(0,255,0),1,cv2.LINE_AA)
-        nLetras+=1
-    
-
 if __name__ == "__main__":
+    print("Cantidad de caracteres:", len(cv2.findContours(cv2.erode(cv2.dilate(cv2.adaptiveThreshold(cv2.erode(cv2.dilate(cv2.cvtColor(cv2.imread("test1.png"), cv2.COLOR_BGR2GRAY), np.ones((1, 1), np.uint8), iterations=1), np.ones((1, 1), np.uint8), iterations=1), 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 31, 2), np.ones((5, 1), np.uint8), iterations=1), np.ones((5, 1), np.uint8), iterations=1), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[1]))
+    
 
-    global imgOriginal=cv2.imread(nombre)
-    global img=cv2.cvtColor(imgOriginal,cv2.COLOR_BGR2GRAY)
-    eliminarRuido()
-    imagenBinaria()
-    elementoEstrural()
-    nLetras=buscarLetras()
-    plt.imshow()
-    plt.show()
-    print(nLetras)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+# showImage = False
+
+# def noiseFilter(image, kernel):
+#     # Eliminar ruido
+#     image = cv2.dilate(image, kernel, iterations=1)
+#     image = cv2.erode(image, kernel, iterations=1)
+#     return image
+
+# def imageToBinary(image):     
+#     # Creacion imagen binaria
+#     return cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 31, 2)
+
+# def createKernel(rows, columns):
+#     # Creacion del kernel
+#     return np.ones((rows, columns), np.uint8)
+
+# def applyStructuralElement(image, kernel):
+#     # Barrido con elemento estructural
+#     image = cv2.dilate(image, kernel, iterations=1)
+#     image = cv2.erode(image, kernel, iterations=1)
+#     return image
+    
+# def markCharacters(image, contour):
+#     # Buscar contornos
+#     for c in contour:
+#         (x, y, w, h) = cv2.boundingRect(c)
+#         cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 1, cv2.LINE_AA)
+
+# if __name__ == "__main__":
+#     origImage = cv2.imread(fileName)
+#     image = cv2.cvtColor(origImage, cv2.COLOR_BGR2GRAY)
+
+#     kernel = createKernel(1, 1)
+#     image = noiseFilter(image, kernel)
+#     image = imageToBinary(image)
+
+#     kernel = createKernel(kernelRows, 1)
+#     image = applyStructuralElement(image, kernel)
+
+#     (_,contour,_) = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+#     charNumber = len(contour)
+#     print("Cantidad de caracteres:", charNumber)
+
+#     if showImage:
+#         markCharacters(origImage, contour)
+#         plt.imshow(origImage)
+#         plt.show()
