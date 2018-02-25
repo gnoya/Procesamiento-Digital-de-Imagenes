@@ -58,19 +58,19 @@ if __name__ == "__main__":
 
         kernel = createKernel(kernelRows, 1)
         image = applyStructuralElement(image, kernel)
-
+        plt.imshow(image)
         (_,contour,_) = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         charNumber = len(contour)
         print("Cantidad de caracteres:", charNumber)
 
         markCharacters(origImage, contour)
-        plt.imshow(origImage)
+        #plt.imshow(origImage)
         plt.show()
-        
+
     else:
         import pytesseract #https://github.com/nikhilkumarsingh/tesseract-python
         from PIL import Image 
-        img=cv2.imread('test4.tif')
+        img=cv2.imread(fileName)
         img=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
         kernel = np.ones((1, 1), np.uint8)
         img = cv2.dilate(img, kernel, iterations=1)
