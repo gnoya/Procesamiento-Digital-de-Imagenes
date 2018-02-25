@@ -4,7 +4,7 @@ import sys
 from matplotlib import pyplot as plt
 
 # Configuracion predeterminada
-fileName = 'test1.png'
+fileName = 'CabreraNoya.png'
 kernelRows = 5
 mode = True
 
@@ -60,7 +60,7 @@ if __name__ == "__main__":
         imageCanny = cv2.Canny(image, 100, 200)
         plt.figure(1)
         plt.title('Contornos extraidos con el filtro Canny')
-        plt.imshow(imageCanny)
+        plt.imshow(imageCanny, cmap='gray')
         kernel = createKernel(kernelRows, 1)
         image = applyStructuralElement(image, kernel)
         (_,contour,_) = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
