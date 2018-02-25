@@ -52,7 +52,7 @@ def markCharacters(image, contour):
 if __name__ == "__main__":
     origImage = cv2.imread(fileName)
     image = cv2.cvtColor(origImage, cv2.COLOR_BGR2GRAY)
-    kernel = createKernel(1, 1)
+    kernel = createKernel(2, 2)
     image = noiseFilter(image, kernel)
     image = imageToBinary(image)
 
