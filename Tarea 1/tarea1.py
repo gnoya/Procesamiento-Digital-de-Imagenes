@@ -74,6 +74,16 @@ if __name__ == "__main__":
         plt.show()
 
     else:
-        import pytesseract #https://github.com/nikhilkumarsingh/tesseract-python
+        import pytesseract 
         from PIL import Image
-        print(pytesseract.image_to_string(image))
+        caracteres=0
+        text=pytesseract.image_to_string(image)
+        lineas=text.split('\n')
+        for x in range (0,len(lineas)):
+            palabras=lineas[x].split(' ')
+            for i in range (0,len(palabras)):
+                caracteres+=len(palabras[i])
+        print("El texto es el siguiente:")
+        print(text+"\n")
+        print("Cantidad de caracteres:")
+        print(caracteres)
