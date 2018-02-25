@@ -56,15 +56,16 @@ if __name__ == "__main__":
         image = noiseFilter(image, kernel)
         image = imageToBinary(image)
 
+        imageCanny=cv2.Canny(image,100,200)
+    
         kernel = createKernel(kernelRows, 1)
         image = applyStructuralElement(image, kernel)
-        plt.imshow(image)
         (_,contour,_) = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         charNumber = len(contour)
         print("Cantidad de caracteres:", charNumber)
 
         markCharacters(origImage, contour)
-        #plt.imshow(origImage)
+        plt.imshow(origImage)
         plt.show()
 
     else:
