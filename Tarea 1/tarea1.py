@@ -75,7 +75,6 @@ if __name__ == "__main__":
 
     else:
         import pytesseract 
-        from PIL import Image
         caracteres=0
         text=pytesseract.image_to_string(image)
         lineas=text.split('\n')
