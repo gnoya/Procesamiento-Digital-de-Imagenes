@@ -10,7 +10,7 @@ mode = True
 
 # Chequeo de los argumentos de entrada
 x = 1
-while(x<len(sys.argv)):
+while(x < len(sys.argv)):
     if sys.argv[x] == "-k":
         x += 1
         kernelRows = int(sys.argv[x])
@@ -75,14 +75,14 @@ if __name__ == "__main__":
 
     else:
         import pytesseract 
-        caracteres=0
-        text=pytesseract.image_to_string(image)
-        lineas=text.split('\n')
-        for x in range (0,len(lineas)):
-            palabras=lineas[x].split(' ')
-            for i in range (0,len(palabras)):
-                caracteres+=len(palabras[i])
+        chars = 0
+        text = pytesseract.image_to_string(image)
+        lineas = text.split('\n')
+        for x in range (0, len(lineas)):
+            words = lineas[x].split(' ')
+            for i in range (0, len(words)):
+                chars += len(words[i])
         print("El texto es el siguiente:")
-        print(text+"\n")
+        print(text + "\n")
         print("Cantidad de caracteres:")
-        print(caracteres)
+        print(chars)
