@@ -1,3 +1,0 @@
-def hist(image):
-    return (cv2.calcHist([image], [0], None, [256], [0, 256]), 
-        cv2.calcHist([image], [1], None, [256], [0, 256]), cv2.calcHist([image], [2], None, [256], [0, 256]))

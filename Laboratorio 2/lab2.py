@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-fileName = 'Pirata.tif'
+fileName = 'NoyaCabrera.jpg'
 
 def maxMin(hist, totalPixels):
     pxHist = 0
