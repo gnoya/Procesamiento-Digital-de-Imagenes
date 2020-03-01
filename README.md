@@ -1,11 +1,11 @@
 # Procesamiento Digital de Imagenes
 
-Electiva cursada en el trimestre Enero - Marzo 2018 en la Universidad Simón Bolívar.
+Optative subject January - March 2018 at Universidad Simón Bolívar.
 
-### Tarea 2:
+### Task 2:
 
 <a href="https://github.com/gnoya/Cigarette-Classification-OpenCV">Cigarette-Classification-OpenCV</a>
 
-### Proyecto Final:
+### Final project:
 
 <a href="https://github.com/gnoya/Gradient-Local-Binary-Patterns-for-Human-Detection">Gradient-Local-Binary-Patterns-for-Human-Detection</a>
